@@ -20,8 +20,21 @@ def separar_por_espaco(string):
 # Aplique a função à segunda coluna do DataFrame
 df.iloc[:,1] = df.iloc[:,1].apply(separar_por_espaco)
 
+# Função para adicionar colunas com valores 0 em um DataFrame
+def adicionar_colunas(df, indices):
+    for idx in indices:
+        col_name = f'NovaColuna{idx}'
+        df.insert(idx, col_name, 0)
 
-df.to_csv('teste_script.ped', sep='\t', index=False, header=False)
+# Índices das colunas a serem adicionadas
+indices_colunas = [0, 2, 3, 4, 5]
 
-# exibe as primeiras 5 linhas do DataFrame
+# Adicionar colunas com valor 0 em cada DataFrame
+adicionar_colunas(df, indices_colunas)
+
+# exibe as primeiras 5 linhas do DataFrame, verificamos se esta tudo OK
 print(df.head())
+
+# Guarda o dataframe 
+df.to_csv('geotipos.ped', sep='\t', index=False, header=False)
+
